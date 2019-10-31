@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import br.com.cubos.cinemacubos.R
 import br.com.cubos.cinemacubos.entries.Movie
 import br.com.cubos.cinemacubos.ui.error.ErrorActivity
@@ -16,7 +18,8 @@ class SplashActivity : AppCompatActivity(), SplashView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        DataBindingUtil
+            .setContentView<ViewDataBinding>(this, R.layout.activity_splash)
 
         presenter.getMovies()
     }
@@ -26,6 +29,6 @@ class SplashActivity : AppCompatActivity(), SplashView {
     }
 
     override fun onError() {
-        startActivity(Intent(this,  ErrorActivity::class.java))
+        startActivity(Intent(this, ErrorActivity::class.java))
     }
 }
