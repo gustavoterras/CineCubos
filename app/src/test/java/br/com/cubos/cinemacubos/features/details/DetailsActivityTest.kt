@@ -40,5 +40,4 @@ class DetailsActivityTest {
         assertNotNull(activity.success)
         assertNotNull(activity.companiesAdapter)
     }
-
 }

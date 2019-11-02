@@ -37,5 +37,4 @@ class SplashActivityTest {
         assertNotNull(activity)
         assertNotNull(activity.presenter)
     }
-
 }

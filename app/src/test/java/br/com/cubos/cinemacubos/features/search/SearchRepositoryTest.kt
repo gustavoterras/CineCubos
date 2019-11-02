@@ -2,7 +2,6 @@ package br.com.cubos.cinemacubos.features.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import br.com.cubos.cinemacubos.client.ConsumerServices
-import br.com.cubos.cinemacubos.ui.main.MainRepositoryImp
 import br.com.cubos.cinemacubos.ui.search.SearchRepositoryImp
 import io.mockk.MockKAnnotations.init
 import io.mockk.every

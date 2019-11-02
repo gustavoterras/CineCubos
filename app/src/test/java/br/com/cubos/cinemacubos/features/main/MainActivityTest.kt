@@ -39,5 +39,4 @@ class MainActivityTest {
         assertNotNull(activity.genresAdapter)
         assertNotNull(activity.moviesAdapter)
     }
-
 }

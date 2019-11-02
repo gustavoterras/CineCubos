@@ -1,17 +1,12 @@
 package br.com.cubos.cinemacubos.features.splash
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import br.com.cubos.cinemacubos.entries.Response
 import br.com.cubos.cinemacubos.ui.splash.SplashPresenterImp
 import br.com.cubos.cinemacubos.ui.splash.SplashRepository
 import br.com.cubos.cinemacubos.ui.splash.SplashView
 import io.mockk.MockKAnnotations.init
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import io.mockk.mockkStatic
-import io.mockk.verify
-import io.reactivex.Single
 import junit.framework.Assert.assertNotNull
 import org.junit.After
 import org.junit.Before
@@ -53,5 +48,4 @@ class SplashPresenterTest {
     fun `must set initial state`() {
         assertNotNull(presenter)
     }
-
 }

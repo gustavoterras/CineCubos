@@ -39,5 +39,4 @@ class SearchActivityTest {
         assertNotNull(activity.textSearch)
         assertNotNull(activity.searchAdapter)
     }
-
 }

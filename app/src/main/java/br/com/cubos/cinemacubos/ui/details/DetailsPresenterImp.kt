@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 class DetailsPresenterImp(private val view: DetailsView, private val repository: DetailsRepository) : DetailsPresenter {
 
-    companion object{
+    companion object {
         const val DELAY = 1000L
     }
 

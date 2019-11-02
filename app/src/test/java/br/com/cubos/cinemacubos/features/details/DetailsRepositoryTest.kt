@@ -3,8 +3,6 @@ package br.com.cubos.cinemacubos.features.details
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import br.com.cubos.cinemacubos.client.ConsumerServices
 import br.com.cubos.cinemacubos.ui.details.DetailsRepositoryImp
-import br.com.cubos.cinemacubos.ui.main.MainRepositoryImp
-import br.com.cubos.cinemacubos.ui.splash.SplashRepositoryImp
 import io.mockk.MockKAnnotations.init
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
