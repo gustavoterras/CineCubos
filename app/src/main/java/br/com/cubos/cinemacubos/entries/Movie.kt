@@ -16,5 +16,4 @@ data class Movie(
     fun shortName(): String {
         return title.split(":").firstOrNull() ?: title
     }
-
 }

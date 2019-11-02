@@ -8,12 +8,16 @@ import java.util.concurrent.TimeUnit
 
 class SplashPresenterImp(private val view: SplashView, private val repository: SplashRepository) : SplashPresenter {
 
+    companion object {
+        const val DELAY = 3000L
+    }
+
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun getGenres() {
         repository
             .getRemoteGenres()
-            .delay(3000, TimeUnit.MILLISECONDS)
+            .delay(DELAY, TimeUnit.MILLISECONDS)
             .saveMainThread()
             .subscribeBy(
                 onSuccess = {

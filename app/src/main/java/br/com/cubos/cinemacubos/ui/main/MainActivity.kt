@@ -4,22 +4,28 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import br.com.cubos.cinemacubos.R
 import br.com.cubos.cinemacubos.BR
+import br.com.cubos.cinemacubos.R
+import br.com.cubos.cinemacubos.adapter.RecyclerBindingAdapter
 import br.com.cubos.cinemacubos.entries.Genres
 import br.com.cubos.cinemacubos.entries.Movie
-import br.com.cubos.cinemacubos.adapter.RecyclerBindingAdapter
 import br.com.cubos.cinemacubos.ui.details.DetailsActivity
 import br.com.cubos.cinemacubos.ui.error.ErrorActivity
+import br.com.cubos.cinemacubos.ui.search.SearchActivity
 import br.com.cubos.cinemacubos.utils.Constants.BUNDLE_KEY
-import com.google.android.flexbox.*
-import kotlinx.android.synthetic.main.activity_main.rv_movies
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.activity_main.rv_genres
+import kotlinx.android.synthetic.main.activity_main.rv_movies
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -52,20 +58,29 @@ class MainActivity : AppCompatActivity(), MainView {
         rv_genres.adapter = genresAdapter
         rv_movies.adapter = moviesAdapter
 
-        genresAdapter.setOnItemClickListener(object : RecyclerBindingAdapter.OnItemClickListener<Genres>{
+        genresAdapter.setOnItemClickListener(object :
+            RecyclerBindingAdapter.OnItemClickListener<Genres> {
             override fun onItemClick(position: Int, view: View, item: Genres) {
                 presenter.getMoviesByGenre(item.id)
+
+                genresAdapter.getItems().forEach { g ->
+                    g.selected = g.id == item.id
+                }
             }
         })
 
-        moviesAdapter.setOnItemClickListener(object : RecyclerBindingAdapter.OnItemClickListener<Movie>{
+        moviesAdapter.setOnItemClickListener(object :
+            RecyclerBindingAdapter.OnItemClickListener<Movie> {
             override fun onItemClick(position: Int, view: View, item: Movie) {
 
                 val intent = Intent(this@MainActivity, DetailsActivity::class.java)
                 intent.putExtra(BUNDLE_KEY, item)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, view.movie_poster, "movie")
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@MainActivity,
+                    view.movie_poster,
+                    "movie"
+                )
                 startActivity(intent, options.toBundle())
-
             }
         })
 
@@ -75,6 +90,13 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        takeIf { item.itemId == R.id.bar_search }?.run {
+            startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getLayoutManager(context: Context): FlexboxLayoutManager {

@@ -10,8 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
-import br.com.cubos.cinemacubos.R
 import br.com.cubos.cinemacubos.BR
+import br.com.cubos.cinemacubos.R
 import br.com.cubos.cinemacubos.adapter.RecyclerBindingAdapter
 import br.com.cubos.cinemacubos.entries.Companies
 import br.com.cubos.cinemacubos.entries.Movie
@@ -21,7 +21,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import kotlinx.android.synthetic.main.details_activity.*
+import kotlinx.android.synthetic.main.activity_details.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -45,7 +45,7 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
 
         val movie: Movie = intent.getSerializableExtra(BUNDLE_KEY) as Movie
 
-        DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.details_activity).apply {
+        DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.activity_details).apply {
             setVariable(BR.movie, movie)
             setVariable(BR.loading, loading)
             setVariable(BR.success, success)

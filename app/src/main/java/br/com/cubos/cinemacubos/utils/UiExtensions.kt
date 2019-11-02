@@ -34,7 +34,6 @@ fun ImageView.load(url: String, onLoadingFinished: () -> Unit = {}) {
             onLoadingFinished()
             return false
         }
-
     }
 
     Glide.with(this)

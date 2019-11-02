@@ -1,0 +1,17 @@
+detekt {
+    toolVersion = "1.0.1"
+    input = files("src/main/java")
+    config = files("../config/detekt/detekt.yml")
+    buildUponDefaultConfig = false
+    reports {
+        xml {
+            enabled = true
+        }
+        html {
+            enabled = true
+        }
+        txt {
+            enabled = false
+        }
+    }
+}

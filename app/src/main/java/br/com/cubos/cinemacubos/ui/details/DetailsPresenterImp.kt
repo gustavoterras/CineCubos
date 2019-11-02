@@ -8,12 +8,16 @@ import java.util.concurrent.TimeUnit
 
 class DetailsPresenterImp(private val view: DetailsView, private val repository: DetailsRepository) : DetailsPresenter {
 
+    companion object{
+        const val DELAY = 1000L
+    }
+
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun getMoviesDetailsById(movieId: Int) {
         repository
             .getRemoteDetails(movieId)
-            .delay(1000, TimeUnit.MILLISECONDS)
+            .delay(DELAY, TimeUnit.MILLISECONDS)
             .doOnSubscribe { view.onLoading() }
             .saveMainThread()
             .subscribeBy(

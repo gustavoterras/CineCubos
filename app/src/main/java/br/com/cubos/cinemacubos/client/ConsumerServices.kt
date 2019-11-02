@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ConsumerServices {
 
-    fun getClient() : IConsumerServices {
+    fun getClient(): IConsumerServices {
 
         val httpClient = OkHttpClient.Builder()
 
@@ -27,5 +27,4 @@ class ConsumerServices {
 
         return retrofit.create(IConsumerServices::class.java)
     }
-
 }

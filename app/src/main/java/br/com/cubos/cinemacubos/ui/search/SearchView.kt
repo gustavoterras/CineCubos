@@ -1,8 +1,8 @@
-package br.com.cubos.cinemacubos.ui.main
+package br.com.cubos.cinemacubos.ui.search
 
 import br.com.cubos.cinemacubos.entries.Movie
 
-interface MainView {
+interface SearchView {
     fun onSuccess(movies: ArrayList<Movie>)
     fun onError()
 }

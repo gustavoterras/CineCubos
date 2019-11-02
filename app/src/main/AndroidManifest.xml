@@ -22,11 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.details.DetailsActivity" />
         <activity
             android:name=".ui.error.ErrorActivity"
             android:theme="@style/AppTheme.FullScreen" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.details.DetailsActivity" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:theme="@style/AppTheme.Transparent" />
     </application>
 
 </manifest>

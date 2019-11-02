@@ -28,4 +28,11 @@ interface IConsumerServices {
         @Query("api_key") key: String,
         @Query("language") language: String
     ): Single<Movie>
+
+    @GET("3/search/movie")
+    fun searchMovies(
+        @Query("query") query: String,
+        @Query("api_key") key: String,
+        @Query("language") language: String
+    ): Single<Response>
 }
