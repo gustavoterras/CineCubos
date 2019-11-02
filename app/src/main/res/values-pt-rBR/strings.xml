@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cinema Cubos</string>
+    <string name="overview">Sinopse</string>
+    <string name="companies">Produção</string>
+    <string name="search">Pesquisar</string>
+</resources>
