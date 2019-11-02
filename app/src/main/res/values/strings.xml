@@ -4,4 +4,6 @@
     <string name="overview">Overview</string>
     <string name="companies">Production</string>
     <string name="search">Search</string>
+    <string name="try_again">Try again</string>
+    <string name="error_message">Something wrong is not right!</string>
 </resources>

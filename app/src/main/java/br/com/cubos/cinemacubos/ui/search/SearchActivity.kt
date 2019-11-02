@@ -26,8 +26,7 @@ import org.koin.core.parameter.parametersOf
 
 class SearchActivity : AppCompatActivity(), SearchView {
 
-    private val presenter: SearchPresenter by inject { parametersOf(this) }
-
+    val presenter: SearchPresenter by inject { parametersOf(this) }
     val textSearch = ObservableField<String>()
     val searchAdapter = RecyclerBindingAdapter<Movie>(R.layout.item_movie_search, BR.item, arrayListOf())
 

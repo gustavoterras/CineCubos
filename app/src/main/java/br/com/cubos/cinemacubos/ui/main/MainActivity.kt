@@ -19,6 +19,7 @@ import br.com.cubos.cinemacubos.ui.details.DetailsActivity
 import br.com.cubos.cinemacubos.ui.error.ErrorActivity
 import br.com.cubos.cinemacubos.ui.search.SearchActivity
 import br.com.cubos.cinemacubos.utils.Constants.BUNDLE_KEY
+import br.com.cubos.cinemacubos.utils.Constants.ERROR_CODE
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -32,8 +33,7 @@ import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    private val presenter: MainPresenter by inject { parametersOf(this) }
-
+    val presenter: MainPresenter by inject { parametersOf(this) }
     val genresAdapter = RecyclerBindingAdapter<Genres>(R.layout.item_genre, BR.item, arrayListOf())
     val moviesAdapter = RecyclerBindingAdapter<Movie>(R.layout.item_movie, BR.item, arrayListOf())
 
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(), MainView {
             }
         })
 
-        presenter.getMoviesByGenre(genres[0].id)
+        presenter.getMoviesByGenre(genres.first().id)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -108,6 +108,11 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun onError() {
-        startActivity(Intent(this, ErrorActivity::class.java))
+        startActivityForResult(Intent(this, ErrorActivity::class.java), ERROR_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.getMoviesByGenre(genresAdapter.getItems().first().id)
     }
 }

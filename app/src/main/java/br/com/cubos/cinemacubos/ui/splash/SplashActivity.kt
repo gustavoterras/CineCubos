@@ -9,13 +9,14 @@ import br.com.cubos.cinemacubos.R
 import br.com.cubos.cinemacubos.entries.Genres
 import br.com.cubos.cinemacubos.ui.error.ErrorActivity
 import br.com.cubos.cinemacubos.ui.main.MainActivity
+import br.com.cubos.cinemacubos.utils.Constants
 import br.com.cubos.cinemacubos.utils.Constants.BUNDLE_KEY
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class SplashActivity : AppCompatActivity(), SplashView {
 
-    private val presenter: SplashPresenter by inject { parametersOf(this) }
+    val presenter: SplashPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,12 @@ class SplashActivity : AppCompatActivity(), SplashView {
     }
 
     override fun onError() {
-        startActivity(Intent(this, ErrorActivity::class.java))
+        startActivityForResult(Intent(this, ErrorActivity::class.java), Constants.ERROR_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.getGenres()
     }
 
     override fun onDestroy() {

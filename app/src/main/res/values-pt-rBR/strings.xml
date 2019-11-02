@@ -4,4 +4,6 @@
     <string name="overview">Sinopse</string>
     <string name="companies">Produção</string>
     <string name="search">Pesquisar</string>
+    <string name="try_again">Tentar novamente</string>
+    <string name="error_message">Algo de errado não está certo!</string>
 </resources>

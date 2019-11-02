@@ -15,6 +15,8 @@ import br.com.cubos.cinemacubos.R
 import br.com.cubos.cinemacubos.adapter.RecyclerBindingAdapter
 import br.com.cubos.cinemacubos.entries.Companies
 import br.com.cubos.cinemacubos.entries.Movie
+import br.com.cubos.cinemacubos.ui.error.ErrorActivity
+import br.com.cubos.cinemacubos.utils.Constants
 import br.com.cubos.cinemacubos.utils.Constants.BUNDLE_KEY
 import br.com.cubos.cinemacubos.utils.load
 import com.google.android.flexbox.FlexDirection
@@ -77,6 +79,11 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        movie.get()?.id?.let { presenter.getMoviesDetailsById(it) }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             supportFinishAfterTransition()
@@ -99,6 +106,7 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
     }
 
     override fun onError() {
+        startActivityForResult(Intent(this, ErrorActivity::class.java), Constants.ERROR_CODE)
         loading.set(false)
         success.set(false)
     }
