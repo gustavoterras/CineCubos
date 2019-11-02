@@ -4,5 +4,5 @@ import br.com.cubos.cinemacubos.entries.Response
 import io.reactivex.Single
 
 interface SplashRepository {
-    fun getRemoteMovies(): Single<Response>
+    fun getRemoteGenres(): Single<Response>
 }

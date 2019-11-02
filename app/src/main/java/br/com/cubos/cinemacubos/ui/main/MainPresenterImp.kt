@@ -1,23 +1,21 @@
-package br.com.cubos.cinemacubos.ui.splash
+package br.com.cubos.cinemacubos.ui.main
 
 import br.com.cubos.cinemacubos.utils.disposeBag
 import br.com.cubos.cinemacubos.utils.saveMainThread
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import java.util.concurrent.TimeUnit
 
-class SplashPresenterImp(private val view: SplashView, private val repository: SplashRepository) : SplashPresenter {
+class MainPresenterImp(private val view: MainView, private val repository: MainRepository) : MainPresenter {
 
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun getGenres() {
+    override fun getMoviesByGenre(genreId: Int) {
         repository
-            .getRemoteGenres()
-            .delay(3000, TimeUnit.MILLISECONDS)
+            .getRemoteMoviesByGenre(genreId)
             .saveMainThread()
             .subscribeBy(
                 onSuccess = {
-                    view.onSuccess(it.genres)
+                    view.onSuccess(it.results)
                 },
                 onError = {
                     view.onError()

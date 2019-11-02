@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="movie"
+            type="br.com.cubos.cinemacubos.entries.Movie" />
+
+        <variable
+            name="loading"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="success"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha=".15"
+                android:text="@{movie.shortName()}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="80sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Terminator" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/movie_card"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="65dp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:onClick="@{onClick}"
+                    android:id="@+id/movie_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:transitionName="movie" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movie_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@{movie.title}"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/movie_card"
+                app:layout_constraintTop_toTopOf="@+id/movie_card"
+                tools:text="Terminator: Dark Fate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movie_vote_date"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/oil"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:text='@{movie.vote_average + ""}'
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/movie_title"
+                app:layout_constraintStart_toEndOf="@+id/movie_card"
+                app:layout_constraintTop_toBottomOf="@+id/movie_title"
+                tools:ignore="RtlSymmetry"
+                tools:text="6.4" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movie_vote_average"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/oil"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:text="@{movie.release_date}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/movie_title"
+                app:layout_constraintStart_toEndOf="@+id/movie_card"
+                app:layout_constraintTop_toBottomOf="@+id/movie_vote_date"
+                tools:ignore="RtlSymmetry"
+                tools:text="02/08/2019" />
+
+            <ProgressBar
+                android:id="@+id/movie_loader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="@{!success &amp;&amp; loading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movie_card"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                app:animation="@{success &amp;&amp; !loading ? @anim/translate_alpha_anim : null}"
+                android:id="@+id/movie_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:visibility="@{success &amp;&amp; !loading ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintTop_toBottomOf="@id/movie_card"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/movie_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center"
+                    android:text="Info"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/movie_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_info" />
+
+                <TextView
+                    android:id="@+id/movie_overview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/overview"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_divider" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/movie_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@{movie.overview}"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_overview"
+                    tools:text="Beatrice Prior must confront her inner demons and continue her fight against a powerful alliance which threatens to tear her society apart." />
+
+                <TextView
+                    android:id="@+id/movie_companies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/companies"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_description" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/movie_companies_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layout_constraintTop_toBottomOf="@id/movie_companies" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

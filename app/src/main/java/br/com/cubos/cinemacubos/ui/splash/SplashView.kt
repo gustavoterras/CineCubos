@@ -1,10 +1,8 @@
 package br.com.cubos.cinemacubos.ui.splash
 
-import br.com.cubos.cinemacubos.entries.Movie
+import br.com.cubos.cinemacubos.entries.Genres
 
 interface SplashView {
-
-    fun showMovies(movies: List<Movie>)
+    fun onSuccess(genres: List<Genres>)
     fun onError()
-
 }

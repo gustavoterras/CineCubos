@@ -1,5 +1,6 @@
 package br.com.cubos.cinemacubos.ui.splash
 
 interface SplashPresenter {
-    fun getMovies()
+    fun getGenres()
+    fun onDisposed()
 }

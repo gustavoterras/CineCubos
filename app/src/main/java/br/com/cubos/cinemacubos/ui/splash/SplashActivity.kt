@@ -2,13 +2,14 @@ package br.com.cubos.cinemacubos.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import br.com.cubos.cinemacubos.R
-import br.com.cubos.cinemacubos.entries.Movie
+import br.com.cubos.cinemacubos.entries.Genres
 import br.com.cubos.cinemacubos.ui.error.ErrorActivity
+import br.com.cubos.cinemacubos.ui.main.MainActivity
+import br.com.cubos.cinemacubos.utils.Constants.BUNDLE_KEY
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -21,14 +22,21 @@ class SplashActivity : AppCompatActivity(), SplashView {
         DataBindingUtil
             .setContentView<ViewDataBinding>(this, R.layout.activity_splash)
 
-        presenter.getMovies()
+        presenter.getGenres()
     }
 
-    override fun showMovies(movies: List<Movie>) {
-        Log.e("a", movies.size.toString())
+    override fun onSuccess(genres: List<Genres>) {
+        startActivity(Intent(this, MainActivity::class.java).apply {
+            putParcelableArrayListExtra(BUNDLE_KEY, ArrayList(genres))
+        })
     }
 
     override fun onError() {
         startActivity(Intent(this, ErrorActivity::class.java))
+    }
+
+    override fun onDestroy() {
+        presenter.onDisposed()
+        super.onDestroy()
     }
 }
