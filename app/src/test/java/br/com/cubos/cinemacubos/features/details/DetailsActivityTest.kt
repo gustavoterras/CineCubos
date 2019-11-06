@@ -1,21 +1,24 @@
 package br.com.cubos.cinemacubos.features.details
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import br.com.cubos.cinemacubos.base.BaseTest
 import br.com.cubos.cinemacubos.entries.Movie
 import br.com.cubos.cinemacubos.ui.details.DetailsActivity
 import br.com.cubos.cinemacubos.utils.Constants.BUNDLE_KEY
 import io.mockk.MockKAnnotations.init
 import io.mockk.mockk
+import org.junit.After
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class DetailsActivityTest {
+class DetailsActivityTest : BaseTest() {
 
     @Rule
     @JvmField
@@ -39,5 +42,10 @@ class DetailsActivityTest {
         assertNotNull(activity.loading)
         assertNotNull(activity.success)
         assertNotNull(activity.companiesAdapter)
+    }
+
+    @After
+    fun teardown() {
+        stopKoin()
     }
 }
