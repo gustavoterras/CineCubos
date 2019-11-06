@@ -7,8 +7,8 @@ import br.com.cubos.cinemacubos.ui.search.SearchView
 import io.mockk.MockKAnnotations.init
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockkStatic
-import junit.framework.Assert.assertNotNull
 import org.junit.After
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

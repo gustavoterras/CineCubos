@@ -11,6 +11,7 @@ buildscript {
         robolectric_version = '4.3'
         archTest_version = '1.1.1'
         junit_version = '4.12'
+        jacoco_version = '0.8.2'
     }
     repositories {
         google()
@@ -20,6 +21,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0-alpha01'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
     }
 }
 

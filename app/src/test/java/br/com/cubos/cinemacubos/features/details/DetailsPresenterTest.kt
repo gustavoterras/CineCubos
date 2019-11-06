@@ -7,8 +7,8 @@ import br.com.cubos.cinemacubos.ui.details.DetailsView
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockkStatic
-import junit.framework.Assert
 import org.junit.After
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -46,6 +46,6 @@ class DetailsPresenterTest {
 
     @Test
     fun `must set initial state`() {
-        Assert.assertNotNull(presenter)
+        assertNotNull(presenter)
     }
 }
