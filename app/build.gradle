@@ -47,6 +47,12 @@ android {
         experimental = true
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
 }
 
 dependencies {
@@ -83,4 +89,5 @@ dependencies {
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "org.robolectric:robolectric:$robolectric_version"
     testImplementation "android.arch.core:core-testing:$archTest_version"
+    testImplementation 'org.koin:koin-test:2.0.1'
 }
